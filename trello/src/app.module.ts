@@ -5,6 +5,7 @@ import { AuthModule } from "./auth/auth.module";
 import { UserModule } from "./user/user.module";
 import { TaskModule } from "./task/task.module";
 import { TimeBlockModule } from "./time-block/time-block.module";
+import { PomodoroModule } from "./pomodoro/pomodoro.module";
 
 @Module({
     imports: [
@@ -12,6 +13,7 @@ import { TimeBlockModule } from "./time-block/time-block.module";
         UserModule,
         TaskModule,
         TimeBlockModule,
+        PomodoroModule,
         ConfigModule.forRoot(),
     ],
 })
