@@ -1,0 +1,11 @@
+.wrapper {
+    @apply flex min-h-screen;
+}
+
+.form {
+    @apply w-1/4 m-auto shadow bg-sidebar rounded-xl p-layout;
+}
+
+.buttons-wrapper {
+    @apply flex items-center gap-5 justify-center;
+}

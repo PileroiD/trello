@@ -34,7 +34,7 @@ export default function RootLayout({
                     <Toaster
                         theme="dark"
                         position="bottom-right"
-                        duration={1500}
+                        duration={3000}
                     />
                 </Providers>
             </body>
