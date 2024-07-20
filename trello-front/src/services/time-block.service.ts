@@ -5,7 +5,7 @@ import {
 } from "@/types/time-block.types";
 
 class TimeBlockService {
-    private BASE_URL = "/user/timer-blocks";
+    private BASE_URL = "/user/time-blocks";
 
     async getTimeBlocks() {
         const response = await axiosWithAuth.get<ITimeBlockResponse[]>(
