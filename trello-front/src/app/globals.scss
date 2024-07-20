@@ -17,7 +17,7 @@
 }
 
 body {
-    @apply text-base overflow-hidden;
+    @apply text-base;
     font-family: var(--font-zen), sans-serif;
     color: rgb(var(--foreground-rgb));
     background-color: #0e0f0f;

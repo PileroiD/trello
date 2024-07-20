@@ -1,0 +1,32 @@
+@mixin transition {
+    @for $i from 1 through 11 {
+        div:nth-child(#{$i}) {
+            @keyframes example-#{$i} {
+                0% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(8px + $i);
+                    opacity: $i / 16;
+                }
+            }
+        }
+    }
+}
+.animated {
+    color: white;
+    padding-right: 1em;
+    transform: translateY(-5px);
+    @include transition;
+    @for $i from 1 through 11 {
+        div:nth-child(#{$i}) {
+            display: inline-block;
+            text-shadow: 2px 2px 3px #3d6366;
+            animation-name: example-#{$i};
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-delay: (#{$i * 0.2s});
+            animation-timing-function: ease-in-out;
+        }
+    }
+}
