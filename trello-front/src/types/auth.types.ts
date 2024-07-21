@@ -14,8 +14,10 @@ export interface IUser {
 }
 
 export interface IAuthResponse {
-    accessToken: string;
-    user: IUser;
+    accessToken?: string;
+    refreshToken?: string;
+    user?: IUser;
+    error?: string;
 }
 
 export type TypeUserForm = Omit<IUser, "id"> & { password?: string };

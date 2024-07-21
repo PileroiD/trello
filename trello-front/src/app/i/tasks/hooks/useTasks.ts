@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 
 export function useTasks() {
-    const { data } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ["tasks"],
         queryFn: () => taskService.getTasks(),
     });
@@ -15,5 +15,5 @@ export function useTasks() {
         setItems(data?.data);
     }, [data?.data]);
 
-    return { items, setItems };
+    return { items, setItems, isLoading };
 }

@@ -23,6 +23,8 @@ export function ListRowParent({
     label,
     setItems,
 }: IListRowParent) {
+    const filteredTasks = filterTasks(items, value);
+
     return (
         <Droppable droppableId={value}>
             {(provided) => (
@@ -31,27 +33,31 @@ export function ListRowParent({
                         <div className="w-full">{label}</div>
                     </div>
 
-                    {filterTasks(items, value)?.map((item, index) => (
-                        <Draggable
-                            key={item.id}
-                            draggableId={item.id}
-                            index={index}
-                        >
-                            {(provided) => (
-                                <div
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                >
-                                    <ListRow
-                                        key={item.id}
-                                        item={item}
-                                        setItems={setItems}
-                                    />
-                                </div>
-                            )}
-                        </Draggable>
-                    ))}
+                    {!filteredTasks?.length ? (
+                        <div className="opacity-30 mt-1 pl-5">Nothing yet</div>
+                    ) : (
+                        filteredTasks?.map((item, index) => (
+                            <Draggable
+                                key={item.id}
+                                draggableId={item.id || ""}
+                                index={index}
+                            >
+                                {(provided) => (
+                                    <div
+                                        ref={provided.innerRef}
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                    >
+                                        <ListRow
+                                            key={item.id}
+                                            item={item}
+                                            setItems={setItems}
+                                        />
+                                    </div>
+                                )}
+                            </Draggable>
+                        ))
+                    )}
 
                     {provided.placeholder}
 

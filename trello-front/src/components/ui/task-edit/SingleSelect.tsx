@@ -48,7 +48,7 @@ export function SingleSelect({
                         {getValue()}
                     </Badge>
                 ) : (
-                    <Badge>Click for select</Badge>
+                    <Badge>Click to select priority</Badge>
                 )}
             </button>
             {value && (

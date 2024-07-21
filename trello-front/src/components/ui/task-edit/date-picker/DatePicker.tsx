@@ -39,7 +39,7 @@ export function DatePicker({
     return (
         <div className="relative" ref={ref}>
             <button onClick={() => setIsShow(!isShow)}>
-                {value ? dayjs(value).format("LL") : "Click for select"}
+                {value ? dayjs(value).format("LL") : "Click to select priority"}
             </button>
             {value && (
                 <button

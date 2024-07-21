@@ -1,6 +1,5 @@
 import { Injectable } from "@nestjs/common";
 import { hash } from "argon2";
-import { startOfDay, subDays } from "date-fns";
 
 import { PrismaService } from "src/prisma.service";
 import { AuthDto } from "src/auth/dto/auth.dto";
@@ -14,9 +13,6 @@ export class UserService {
         return this.prisma.user.findUnique({
             where: {
                 id,
-            },
-            include: {
-                tasks: true,
             },
         });
     }
@@ -32,45 +28,10 @@ export class UserService {
     async getProfile(id: string) {
         const profile = await this.getById(id);
 
-        const totalTasks = profile.tasks.length;
-        const completedTasks = await this.prisma.task.count({
-            where: {
-                userId: id,
-                isCompleted: true,
-            },
-        });
-
-        const todayStart = startOfDay(new Date());
-        const weekStart = startOfDay(subDays(new Date(), 7));
-
-        const todayTasks = await this.prisma.task.count({
-            where: {
-                userId: id,
-                createdAt: {
-                    gte: todayStart.toISOString(),
-                },
-            },
-        });
-
-        const weekTasks = await this.prisma.task.count({
-            where: {
-                userId: id,
-                createdAt: {
-                    gte: weekStart.toISOString(),
-                },
-            },
-        });
-
         const { password, ...user } = profile;
 
         return {
             user,
-            statistics: [
-                { label: "Total", value: totalTasks },
-                { label: "Completed tasks", value: completedTasks },
-                { label: "Today tasks", value: todayTasks },
-                { label: "Week tasks", value: weekTasks },
-            ],
         };
     }
 

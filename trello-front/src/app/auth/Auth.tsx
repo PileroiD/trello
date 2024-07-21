@@ -34,6 +34,10 @@ export function Auth() {
             reset();
             push(DASHBOARD_PAGES.HOME);
         },
+        onError(error: any) {
+            console.log(error.response.data.message);
+            toast.error(error.response.data.message);
+        },
     });
 
     const onSubmit: SubmitHandler<IAuthForm> = (data) => {

@@ -35,6 +35,7 @@ export default function RootLayout({
                         theme="dark"
                         position="bottom-right"
                         duration={3000}
+                        richColors
                     />
                 </Providers>
             </body>

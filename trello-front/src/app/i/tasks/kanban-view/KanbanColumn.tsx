@@ -18,6 +18,8 @@ interface IKanbanColumn {
 }
 
 export function KanbanColumn({ value, items, label, setItems }: IKanbanColumn) {
+    const filteredTasks = filterTasks(items, value);
+
     return (
         <Droppable droppableId={value}>
             {(provided) => (
@@ -25,27 +27,31 @@ export function KanbanColumn({ value, items, label, setItems }: IKanbanColumn) {
                     <div className={styles.column}>
                         <div className={styles.columnHeading}>{label}</div>
 
-                        {filterTasks(items, value)?.map((item, index) => (
-                            <Draggable
-                                key={item.id}
-                                draggableId={item.id}
-                                index={index}
-                            >
-                                {(provided) => (
-                                    <div
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                    >
-                                        <KanbanCard
-                                            key={item.id}
-                                            item={item}
-                                            setItems={setItems}
-                                        />
-                                    </div>
-                                )}
-                            </Draggable>
-                        ))}
+                        {!filteredTasks?.length ? (
+                            <div className="opacity-30 mt-6">Nothing yet</div>
+                        ) : (
+                            filteredTasks?.map((item, index) => (
+                                <Draggable
+                                    key={item.id}
+                                    draggableId={item.id || ""}
+                                    index={index}
+                                >
+                                    {(provided) => (
+                                        <div
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                            {...provided.dragHandleProps}
+                                        >
+                                            <KanbanCard
+                                                key={item.id}
+                                                item={item}
+                                                setItems={setItems}
+                                            />
+                                        </div>
+                                    )}
+                                </Draggable>
+                            ))
+                        )}
 
                         {provided.placeholder}
 

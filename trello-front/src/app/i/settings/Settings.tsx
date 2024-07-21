@@ -94,9 +94,7 @@ export default function Settings() {
                     </div>
                 </div>
 
-                <Button type="submit" disabled={isPending}>
-                    Save
-                </Button>
+                <Button disabled={isPending}>Save</Button>
             </form>
         </div>
     );
