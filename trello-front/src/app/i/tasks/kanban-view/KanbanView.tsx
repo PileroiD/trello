@@ -14,7 +14,9 @@ export function KanbanView() {
     const { onDragEnd } = useTaskDnd();
 
     return (
-        <DragDropContext onDragEnd={onDragEnd}>
+        <DragDropContext
+            onDragEnd={(result) => onDragEnd(result, items, setItems)}
+        >
             <div className={styles.board}>
                 {COLUMNS.map((column) => (
                     <KanbanColumn

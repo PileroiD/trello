@@ -1,4 +1,5 @@
 import { axiosWithAuth } from "@/api/interceptors";
+import { useAddIndexes } from "@/hooks/useAddIndexes";
 import { ITaskResponse, TypeTaskFormState } from "@/types/task.types";
 
 class TaskService {
@@ -8,7 +9,10 @@ class TaskService {
         const response = await axiosWithAuth.get<ITaskResponse[]>(
             this.BASE_URL
         );
-        return response;
+
+        const indexedTasks = useAddIndexes(response.data);
+
+        return indexedTasks;
     }
 
     async createTask(data: TypeTaskFormState) {
@@ -23,6 +27,14 @@ class TaskService {
         const response = await axiosWithAuth.put<ITaskResponse>(
             `${this.BASE_URL}/${id}`,
             data
+        );
+        return response;
+    }
+
+    async updateTasksOrder(taskOrder: { id: string; index: number }[]) {
+        const response = await axiosWithAuth.post(
+            `${this.BASE_URL}/update-order`,
+            taskOrder
         );
         return response;
     }

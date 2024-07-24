@@ -46,6 +46,16 @@ export class TaskController {
     }
 
     @HttpCode(200)
+    @Post("update-order")
+    @Auth()
+    async updateOrder(
+        @Body() body: { id: string; index: number }[],
+        @CurrentUser("id") userId: string
+    ) {
+        return this.taskService.updateTaskOrder(body, userId);
+    }
+
+    @HttpCode(200)
     @Delete(":id")
     @Auth()
     async delete(@Param("id") taskId: string) {

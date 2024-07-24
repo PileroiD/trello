@@ -10,6 +10,7 @@ export interface ITaskResponse extends IBase {
     name: string;
     priority?: EnumTaskPriority;
     isCompleted: boolean;
+    index: number;
 }
 
 export type TypeTaskFormState = Partial<

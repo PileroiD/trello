@@ -12,6 +12,9 @@ export class TaskService {
             where: {
                 userId,
             },
+            orderBy: {
+                index: "asc",
+            },
         });
     }
 
@@ -36,6 +39,31 @@ export class TaskService {
             },
             data: dto,
         });
+    }
+
+    async updateTaskOrder(
+        taskOrder: { id: string; index: number }[],
+        userId: string
+    ): Promise<any[]> {
+        await this.prisma.$transaction(async (prisma) => {
+            for (const task of taskOrder) {
+                const { id, index } = task;
+                await prisma.task.update({
+                    where: {
+                        userId,
+                        id,
+                    },
+                    data: { index },
+                });
+            }
+        });
+
+        const updatedTasks = await this.prisma.task.findMany({
+            where: { userId },
+            orderBy: { index: "asc" },
+        });
+
+        return updatedTasks;
     }
 
     async delete(taskId: string) {

@@ -38,8 +38,8 @@ export class TimeBlockController {
     @HttpCode(200)
     @Put("update-order")
     @Auth()
-    async updateOrder(@Body() updateOrderDto: UpdateOrderDto) {
-        return this.timeBlockService.updateOrder(updateOrderDto.ids);
+    async updateOrder(@Body() updateOrderDto: string[]) {
+        return this.timeBlockService.updateOrder(updateOrderDto);
     }
 
     @UsePipes(new ValidationPipe())
