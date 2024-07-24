@@ -11,7 +11,7 @@ interface IListAddRowInput {
 
 export function ListAddRowInput({ setItems, filterDate }: IListAddRowInput) {
     const addRow = () => {
-        setItems((prev) => {
+        setItems((prev: any) => {
             if (!prev) return;
 
             return [

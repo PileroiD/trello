@@ -12,7 +12,7 @@ export function KanbanAddCardInput({
     filterDate,
 }: IKanbanAddCardInput) {
     const addCard = () => {
-        setItems((prev) => {
+        setItems((prev: any) => {
             if (!prev) return;
 
             return [
